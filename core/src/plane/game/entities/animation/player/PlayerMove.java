@@ -20,8 +20,9 @@ public class PlayerMove implements ApplicationListener {
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
-    public PlayerMove(Vector2 position) {
+    public PlayerMove(Vector2 position, SpriteBatch spriteBatch) {
         this.position = position;
+        this.spriteBatch = spriteBatch;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class PlayerMove implements ApplicationListener {
 
         // Instantiate a SpriteBatch for drawing and reset the elapsed animation
         // time to 0
-        spriteBatch = new SpriteBatch();
+        // spriteBatch = new SpriteBatch();
         stateTime = 0f;
     }
 
@@ -62,9 +63,9 @@ public class PlayerMove implements ApplicationListener {
 
         // Get current frame of animation for the current stateTime
         TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
-        spriteBatch.begin();
+        // spriteBatch.begin();
         spriteBatch.draw(currentFrame, position.x - 55.5f, position.y);
-        spriteBatch.end();
+        // spriteBatch.end();
     }
 
     @Override
