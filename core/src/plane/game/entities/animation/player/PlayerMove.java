@@ -63,7 +63,7 @@ public class PlayerMove implements ApplicationListener {
         // Get current frame of animation for the current stateTime
         TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
         spriteBatch.begin();
-        spriteBatch.draw(currentFrame, position.x, position.y);
+        spriteBatch.draw(currentFrame, position.x - 55.5f, position.y);
         spriteBatch.end();
     }
 

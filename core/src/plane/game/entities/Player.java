@@ -24,12 +24,20 @@ public class Player {
             position.y -= speed;
         }
 
-        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            position.x += speed + 2.5f;
-        }
-
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
             position.x -= speed;
+        }
+
+        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+            position.x += (speed + 7.5f);
+        }
+
+        if (Gdx.input.isKeyPressed(Keys.RIGHT) && Gdx.input.isKeyPressed(Keys.UP)) {
+            position.y += (speed + 7.5f);
+        }
+
+        if (Gdx.input.isKeyPressed(Keys.RIGHT) && Gdx.input.isKeyPressed(Keys.UP)) {
+            position.y -= (speed + 7.5f);
         }
     }
 
