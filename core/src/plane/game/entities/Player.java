@@ -1,6 +1,7 @@
 package plane.game.entities;
 
-// import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 
 import plane.game.entities.animation.player.*;
@@ -11,6 +12,27 @@ public class Player {
     PlayerIdle idle;
     PlayerMove move;
 
+    boolean isIdle = true;
+    float speed = 5.8f;
+
+    private void move() {
+        if (Gdx.input.isKeyPressed(Keys.UP)) {
+            position.y += speed;
+        }
+
+        if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+            position.y -= speed;
+        }
+
+        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+            position.x += speed + 2.5f;
+        }
+
+        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+            position.x -= speed;
+        }
+    }
+
     public void create() {
         move = new PlayerMove(position);
         idle = new PlayerIdle(position);
@@ -20,8 +42,13 @@ public class Player {
     }
 
     public void render() {
-        // idle.render();
-        move.render();
+        move();
+        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+            // isIdle = false;
+            move.render();
+        } else {
+            idle.render();
+        }
     }
 
     public void dispose() {
