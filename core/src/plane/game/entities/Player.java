@@ -20,10 +20,10 @@ public class Player {
     public static boolean isShoot = false;
 
     private void borderCheck() {
-        if (position.x > Gdx.graphics.getWidth() - 120) {
-            position.x = Gdx.graphics.getWidth() - 120;
-        } else if (position.x < 0) {
-            position.x = 0;
+        if (position.x > Gdx.graphics.getWidth() - 150) {
+            position.x = Gdx.graphics.getWidth() - 150;
+        } else if (position.x < -50) {
+            position.x = -50;
         } else if (position.y > Gdx.graphics.getHeight() - 80) {
             position.y = Gdx.graphics.getHeight() - 80;
         } else if (position.y < 0) {
@@ -58,7 +58,7 @@ public class Player {
             position.y -= (speed + 7.5f);
         }
 
-        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+        if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
             isShoot = true;
         }
     }
@@ -76,8 +76,10 @@ public class Player {
     }
 
     public void render() {
-        update();
         batch.begin();
+
+        update();
+
         if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
             move.render();
         } else {
@@ -85,6 +87,7 @@ public class Player {
         }
 
         if (isShoot) {
+            missile.update(position);
             missile.render();
         }
 
