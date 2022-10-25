@@ -14,4 +14,4 @@ java plane game from libGdx Engine
 
 
 ## How to Run the Program
-> Use terminal and type gradlew build or gradle(if you have gradle installed) build then gradlew or gradle run 
+> Use terminal and type gradlew build or gradle(if you have gradle installed) build then gradlew run or gradle run 
