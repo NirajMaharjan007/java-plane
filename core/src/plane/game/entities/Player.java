@@ -17,9 +17,11 @@ public class Player {
 
     float speed = 5.8f;
 
+    public static boolean isShoot = false;
+
     private void borderCheck() {
-        if (position.x > Gdx.graphics.getWidth() - 80) {
-            position.x = Gdx.graphics.getWidth() - 80;
+        if (position.x > Gdx.graphics.getWidth() - 120) {
+            position.x = Gdx.graphics.getWidth() - 120;
         } else if (position.x < 0) {
             position.x = 0;
         } else if (position.y > Gdx.graphics.getHeight() - 80) {
@@ -29,7 +31,7 @@ public class Player {
         }
     }
 
-    private void move() {
+    private void update() {
         borderCheck();
 
         if (Gdx.input.isKeyPressed(Keys.UP)) {
@@ -55,14 +57,18 @@ public class Player {
         if (Gdx.input.isKeyPressed(Keys.RIGHT) && Gdx.input.isKeyPressed(Keys.UP)) {
             position.y -= (speed + 7.5f);
         }
+
+        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+            isShoot = true;
+        }
     }
 
     public void create() {
+        missile = new Missile(position);
+
         batch = new SpriteBatch();
         move = new PlayerMove(position, batch);
         idle = new PlayerIdle(position, batch);
-
-        missile = new Missile(position);
 
         idle.create();
         move.create();
@@ -70,14 +76,18 @@ public class Player {
     }
 
     public void render() {
-        move();
+        update();
         batch.begin();
         if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
             move.render();
         } else {
             idle.render();
         }
-        // missile.render();
+
+        if (isShoot) {
+            missile.render();
+        }
+
         batch.end();
 
     }

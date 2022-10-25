@@ -19,11 +19,12 @@ public class Missile implements ApplicationListener {
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
-    float x;
+    float x, y;
 
     public Missile(Vector2 position) {
         this.position = position;
         x = position.x;
+        y = position.y;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class Missile implements ApplicationListener {
         }
 
         // Initialize the Animation with the frame interval and array of frames
-        missileAnimation = new Animation<TextureRegion>(0.065f, missileFrames);
+        missileAnimation = new Animation<TextureRegion>(0.05f, missileFrames);
 
         // Instantiate a SpriteBatch for drawing and reset the elapsed animation
         // time to 0
@@ -64,10 +65,20 @@ public class Missile implements ApplicationListener {
         // Get current frame of animation for the current stateTime
         TextureRegion currentFrame = missileAnimation.getKeyFrame(stateTime, true);
         spriteBatch.begin();
-        spriteBatch.draw(currentFrame, x, position.y + 28.5f);
+
+        spriteBatch.draw(currentFrame, x, y);
+
+        if (Player.isShoot) {
+            if (x > Gdx.graphics.getWidth()) {
+                x = position.x;
+                y = position.y;
+                Player.isShoot = false;
+            } else
+                x += 6.5f;
+        }
+
         spriteBatch.end();
 
-        x += 2.5f;
     }
 
     @Override
