@@ -77,7 +77,7 @@ public class Player {
         } else {
             idle.render();
         }
-        missile.render();
+        // missile.render();
         batch.end();
 
     }
