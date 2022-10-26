@@ -74,12 +74,13 @@ public class Missile implements ApplicationListener {
 
     public void update(Vector2 pos) {
         if (Player.isShoot) {
-            if (x > Gdx.graphics.getWidth()) {
+            x += 7.55f;
+            if (x > Gdx.graphics.getWidth() - 60) {
                 Player.isShoot = false;
-                x = pos.x + 30f;
-                y = pos.y + 25.5f;
-            } else
-                x += 6.5f;
+            }
+        } else {
+            x = pos.x + 50.5f;
+            y = pos.y + 25.5f;
         }
     }
 

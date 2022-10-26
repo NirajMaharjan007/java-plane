@@ -76,9 +76,8 @@ public class Player {
     }
 
     public void render() {
-        batch.begin();
-
         update();
+        batch.begin();
 
         if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
             move.render();
@@ -87,18 +86,18 @@ public class Player {
         }
 
         if (isShoot) {
-            missile.update(position);
             missile.render();
         }
 
         batch.end();
+        missile.update(position);
 
     }
 
     public void dispose() {
         // idle.dispose();
         // move.dispose();
-        batch.dispose();
         missile.dispose();
+        batch.dispose();
     }
 }
