@@ -2,14 +2,18 @@ package plane.game.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+// import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import plane.game.entities.animation.player.*;
+import plane.game.entities.sound.MissileSound;
 
 public class Player {
-    SpriteBatch batch;
     Vector2 position = new Vector2(80, 80);
+
+    MissileSound sound;
+    SpriteBatch batch;
 
     Missile missile;
     PlayerIdle idle;
@@ -60,13 +64,19 @@ public class Player {
 
         if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
             isShoot = true;
+            if (Missile.x < Gdx.graphics.getWidth()) {
+                if (isShoot)
+                    sound.shotPlay();
+                else
+                    sound.shotStop();
+            }
         }
     }
 
     public void create() {
-        missile = new Missile(position);
-
+        sound = new MissileSound();
         batch = new SpriteBatch();
+        missile = new Missile(position);
         move = new PlayerMove(position, batch);
         idle = new PlayerIdle(position, batch);
 
@@ -77,8 +87,9 @@ public class Player {
 
     public void render() {
         update();
-        batch.begin();
+        missile.update(position);
 
+        batch.begin();
         if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
             move.render();
         } else {
@@ -90,7 +101,6 @@ public class Player {
         }
 
         batch.end();
-        missile.update(position);
 
     }
 

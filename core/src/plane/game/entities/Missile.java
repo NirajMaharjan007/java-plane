@@ -19,7 +19,7 @@ public class Missile implements ApplicationListener {
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
-    float x, y;
+    public static float x, y;
 
     public Missile(Vector2 position) {
         this.position = position;
@@ -74,8 +74,8 @@ public class Missile implements ApplicationListener {
 
     public void update(Vector2 pos) {
         if (Player.isShoot) {
-            x += 7.55f;
-            if (x > Gdx.graphics.getWidth() - 60) {
+            x += 12.55f;
+            if (x > Gdx.graphics.getWidth() - 20) {
                 Player.isShoot = false;
             }
         } else {
