@@ -20,10 +20,13 @@ public class MissileSound {
 
     public void shotPlay() {
         hit.play();
-        // hit.stop();
     }
 
     public void shotStop() {
         hit.stop();
+    }
+
+    public void dispose() {
+        hit.dispose();
     }
 }
