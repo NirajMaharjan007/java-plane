@@ -28,7 +28,9 @@ public class Missile implements ApplicationListener {
     }
 
     @Override
-    public void create() { // Load the sprite sheet as a Texture
+    public void create() {
+
+        // Load the sprite sheet as a Texture
         missileSheet = new Texture(Gdx.files.internal("./image/player/missile_shoot.png"));
 
         // Use the split utility method to create a 2D array of TextureRegions. This is
@@ -49,7 +51,7 @@ public class Missile implements ApplicationListener {
         }
 
         // Initialize the Animation with the frame interval and array of frames
-        missileAnimation = new Animation<TextureRegion>(0.05f, missileFrames);
+        missileAnimation = new Animation<TextureRegion>(0.025f, missileFrames);
 
         // Instantiate a SpriteBatch for drawing and reset the elapsed animation
         // time to 0
@@ -74,7 +76,7 @@ public class Missile implements ApplicationListener {
 
     public void update(Vector2 pos) {
         if (Player.isShoot) {
-            x += 12.55f;
+            x += 16.55f;
             if (x > Gdx.graphics.getWidth() - 20) {
                 Player.isShoot = false;
             }
