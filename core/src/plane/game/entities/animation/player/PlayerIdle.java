@@ -70,7 +70,7 @@ public class PlayerIdle implements ApplicationListener {
 
     @Override
     public void dispose() { // SpriteBatches and Textures must always be disposed
-        spriteBatch.dispose();
+        // spriteBatch.dispose();
         walkSheet.dispose();
     }
 
