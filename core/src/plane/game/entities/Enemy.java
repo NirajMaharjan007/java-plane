@@ -15,6 +15,10 @@ public class Enemy {
     Random random = new Random();
 
     EnemyMove move;
+    EnemyInvertMove invertMove;
+
+    private float speed = 8.68f;
+    private boolean isRight = true;
 
     public Enemy(SpriteBatch spriteBatch) {
         this.spriteBatch = spriteBatch;
@@ -22,26 +26,39 @@ public class Enemy {
 
     public void create() {
         move = new EnemyMove(position, spriteBatch);
+        invertMove = new EnemyInvertMove(position, spriteBatch);
 
         move.create();
+        invertMove.create();
     }
 
     private void update() {
-        if (position.x < Gdx.graphics.getWidth() - 60) {
-            position.x += 8.5f;
-        }
+        position.x += speed;
+        if (position.x > Gdx.graphics.getWidth() || position.x < -180)
+            speed = -speed;
+
+        if (position.x > Gdx.graphics.getWidth())
+            isRight = false;
+
+        else if (position.x < -180)
+            isRight = true;
     }
 
     public void render() {
         update();
 
         // spriteBatch.begin();
-        move.render();
+        if (isRight)
+            move.render();
+
+        else
+            invertMove.render();
         // spriteBatch.end();
     }
 
     public void dispose() {
         move.dispose();
+        invertMove.dispose();
         spriteBatch.dispose();
     }
 }
