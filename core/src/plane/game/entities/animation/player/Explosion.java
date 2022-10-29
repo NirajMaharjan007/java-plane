@@ -1,4 +1,4 @@
-package plane.game.entities.animation.enemy;
+package plane.game.entities.animation.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ApplicationListener;
@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 
-public class EnemyMove implements ApplicationListener {
+public class Explosion implements ApplicationListener {
     // Constant rows and columns of the sprite sheet
-    private static final int FRAME_COLS = 3, FRAME_ROWS = 1;
+    private static final int FRAME_COLS = 6, FRAME_ROWS = 1;
 
     Vector2 position;
 
@@ -20,7 +20,7 @@ public class EnemyMove implements ApplicationListener {
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
-    public EnemyMove(Vector2 position, SpriteBatch spriteBatch) {
+    public Explosion(Vector2 position, SpriteBatch spriteBatch) {
         this.position = position;
         this.spriteBatch = spriteBatch;
     }
@@ -28,7 +28,7 @@ public class EnemyMove implements ApplicationListener {
     @Override
     public void create() {
         // Load the sprite sheet as a Texture
-        walkSheet = new Texture(Gdx.files.internal("./image/enemy/enemy_plane.png"));
+        walkSheet = new Texture(Gdx.files.internal("./image/player/plane_boom.png"));
 
         // Use the split utility method to create a 2D array of TextureRegions. This is
         // possible because this sprite sheet contains frames of equal size and they are
@@ -44,18 +44,18 @@ public class EnemyMove implements ApplicationListener {
         for (int i = 0; i < FRAME_ROWS; i++) {
             for (int j = 0; j < FRAME_COLS; j++) {
                 walkFrames[index++] = tmp[i][j];
+                if (j == 6) {
+                    break;
+                }
             }
         }
 
         // Initialize the Animation with the frame interval and array of frames
-        walkAnimation = new Animation<TextureRegion>(0.062f, walkFrames);
+        walkAnimation = new Animation<TextureRegion>(0.095f, walkFrames);
 
         // Instantiate a SpriteBatch for drawing and reset the elapsed animation
         // time to 0
         // spriteBatch = new SpriteBatch();
-
-        System.out.println("EnemyMove.create() + " + walkSheet.getWidth() + " " + walkSheet.getHeight());
-
         stateTime = 0f;
     }
 

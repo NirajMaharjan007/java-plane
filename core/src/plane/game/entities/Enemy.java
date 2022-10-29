@@ -34,8 +34,10 @@ public class Enemy {
 
     private void update() {
         position.x += speed;
-        if (position.x > Gdx.graphics.getWidth() || position.x < -180)
+        if (position.x > Gdx.graphics.getWidth() || position.x < -180) {
+            position.y += 20.5f;
             speed = -speed;
+        }
 
         if (position.x > Gdx.graphics.getWidth())
             isRight = false;
@@ -60,5 +62,13 @@ public class Enemy {
         move.dispose();
         invertMove.dispose();
         spriteBatch.dispose();
+    }
+
+    public float getX() {
+        return position.x;
+    }
+
+    public float getY() {
+        return position.y;
     }
 }

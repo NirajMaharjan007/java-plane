@@ -3,9 +3,9 @@ package plane.game.env;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
-import plane.game.entities.Player;
-import plane.game.entities.Enemy;
+import plane.game.entities.*;
 
 public class WorldEnvironment {
     SpriteBatch spriteBatch;
@@ -26,11 +26,23 @@ public class WorldEnvironment {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        Rectangle player_rect = new Rectangle(player.getX(), player.getY(), 60, 30);
+        Rectangle enemy_rect = new Rectangle(enemy.getX(), enemy.getY(), 60, 20);
+
+        boolean isOverplayed = enemy_rect.overlaps(player_rect);
+
         spriteBatch.begin();
-        player.render();
-        enemy.render();
+
+        if (!isOverplayed) {
+            player.render();
+            enemy.render();
+        } else {
+            player.renderExplosion();
+        }
+
         spriteBatch.end();
 
+        System.out.println(isOverplayed);
     }
 
     public void dispose() {

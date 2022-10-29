@@ -10,19 +10,21 @@ import plane.game.entities.animation.player.*;
 import plane.game.entities.sound.MissileSound;
 
 public class Player {
-    MissileSound sound;
-
-    protected static Vector2 position = new Vector2(80, 80);
-    Vector2 bullet_position = position;
+    Vector2 position = new Vector2(80, 80);
 
     SpriteBatch batch;
+
+    MissileSound sound;
 
     PlayerIdle idle;
     PlayerMove move;
 
+    Explosion explosion;
+
     float speed = 5.8f;
 
     public static boolean isShoot = false;
+    // public static boolean isExploded = false;
 
     public Player(SpriteBatch batch) {
         this.batch = batch;
@@ -74,11 +76,14 @@ public class Player {
     public void create() {
         move = new PlayerMove(position, batch);
         idle = new PlayerIdle(position, batch);
+        explosion = new Explosion(position, batch);
+
         sound = new MissileSound();
 
         // sound.create();
         idle.create();
         move.create();
+        explosion.create();
     }
 
     public void render() {
@@ -92,10 +97,23 @@ public class Player {
 
     }
 
+    public void renderExplosion() {
+        explosion.render();
+    }
+
     public void dispose() {
         idle.dispose();
         move.dispose();
         sound.dispose();
         batch.dispose();
+        explosion.dispose();
+    }
+
+    public float getX() {
+        return position.x;
+    }
+
+    public float getY() {
+        return position.y;
     }
 }
