@@ -18,7 +18,7 @@ public class Explosion implements ApplicationListener {
     SpriteBatch spriteBatch;
 
     // A variable for tracking elapsed time for the animation
-    float stateTime;
+    public float stateTime;
 
     public Explosion(Vector2 position, SpriteBatch spriteBatch) {
         this.position = position;
@@ -44,9 +44,6 @@ public class Explosion implements ApplicationListener {
         for (int i = 0; i < FRAME_ROWS; i++) {
             for (int j = 0; j < FRAME_COLS; j++) {
                 walkFrames[index++] = tmp[i][j];
-                if (j == 6) {
-                    break;
-                }
             }
         }
 
@@ -66,6 +63,8 @@ public class Explosion implements ApplicationListener {
 
         // Get current frame of animation for the current stateTime
         TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
+        System.out.println("Explosion.render(): " + stateTime);
+
         // spriteBatch.begin();
         spriteBatch.draw(currentFrame, position.x, position.y);
         // spriteBatch.end();

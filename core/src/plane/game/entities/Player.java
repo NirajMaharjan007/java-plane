@@ -94,11 +94,14 @@ public class Player {
         } else {
             idle.render();
         }
-
     }
 
     public void renderExplosion() {
         explosion.render();
+    }
+
+    public float getStateTime() {
+        return explosion.stateTime;
     }
 
     public void dispose() {
