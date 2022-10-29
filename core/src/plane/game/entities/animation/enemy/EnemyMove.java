@@ -54,8 +54,6 @@ public class EnemyMove implements ApplicationListener {
         // time to 0
         // spriteBatch = new SpriteBatch();
 
-        System.out.println("EnemyMove.create() + " + walkSheet.getWidth() + " " + walkSheet.getHeight());
-
         stateTime = 0f;
     }
 
