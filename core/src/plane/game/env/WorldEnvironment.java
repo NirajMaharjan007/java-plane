@@ -41,7 +41,7 @@ public class WorldEnvironment {
             player.render();
             enemy.render();
         } else {
-            if (player.getStateTime() < 2.8) {
+            if (player.getStateTime() < 2.8f) {
                 player.renderExplosion();
             } else {
                 float width = Gdx.graphics.getWidth();
