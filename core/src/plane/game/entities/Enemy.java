@@ -17,7 +17,7 @@ public class Enemy {
     EnemyMove move;
     EnemyInvertMove invertMove;
 
-    private float speed = 8.68f;
+    private float speed = 8.72f;
     private boolean isRight = true;
 
     public Enemy(SpriteBatch spriteBatch) {
@@ -35,9 +35,14 @@ public class Enemy {
     private void update() {
         position.x += speed;
         if (position.x > Gdx.graphics.getWidth() || position.x < -180) {
-            position.y += 20.5f;
+            position.y += 28.5f;
             speed = -speed;
         }
+
+        if (position.y > Gdx.graphics.getHeight())
+            position.y = 0;
+        else if (position.y < -100)
+            position.y = Gdx.graphics.getHeight();
 
         if (position.x > Gdx.graphics.getWidth())
             isRight = false;
