@@ -4,11 +4,11 @@ import com.badlogic.gdx.Gdx;
 // import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
-public class MissileSound {
+public class MySound {
     // Music music;
     Sound hit;
 
-    public MissileSound() {
+    public MySound() {
         // music =
         // Gdx.audio.newMusic(Gdx.files.internal("./sounds/background_music.mp3"));
         hit = Gdx.audio.newSound(Gdx.files.internal("./sound/laserShoot.wav"));

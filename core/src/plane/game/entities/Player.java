@@ -7,14 +7,14 @@ import com.badlogic.gdx.math.Vector2;
 // import com.badlogic.gdx.audio.Sound;
 
 import plane.game.entities.animation.player.*;
-import plane.game.entities.sound.MissileSound;
+import plane.game.entities.sound.MySound;
 
 public class Player {
     Vector2 position = new Vector2(80, 80);
 
     SpriteBatch batch;
 
-    MissileSound sound;
+    MySound sound;
 
     PlayerIdle idle;
     PlayerMove move;
@@ -78,7 +78,7 @@ public class Player {
         idle = new PlayerIdle(position, batch);
         explosion = new Explosion(position, batch);
 
-        sound = new MissileSound();
+        sound = new MySound();
 
         // sound.create();
         idle.create();
