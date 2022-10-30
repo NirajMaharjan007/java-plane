@@ -6,12 +6,15 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.g2d.*;
 
 import plane.game.entities.*;
+import plane.game.entities.sound.MySound;
 
 public class WorldEnvironment {
     SpriteBatch spriteBatch;
 
     Player player;
     Enemy enemy;
+
+    MySound sound;
 
     BitmapFont font;
 
@@ -21,6 +24,7 @@ public class WorldEnvironment {
         enemy = new Enemy(spriteBatch);
 
         font = new BitmapFont();
+        sound = new MySound();
 
         player.create();
         enemy.create();
@@ -38,12 +42,16 @@ public class WorldEnvironment {
         spriteBatch.begin();
 
         if (!isOverplayed) {
+            sound.backgroundMusicPlay(true);
             player.render();
             enemy.render();
         } else {
-            if (player.getStateTime() < 2.8f) {
+            sound.backgroundMusicStop();
+            if (player.getStateTime() < 1.65f) {
+                sound.exploded();
                 player.renderExplosion();
             } else {
+                sound.stopExplode();
                 float width = Gdx.graphics.getWidth();
                 float height = Gdx.graphics.getHeight();
 
@@ -60,6 +68,7 @@ public class WorldEnvironment {
     public void dispose() {
         // player.dispose();
         // enemy.dispose();
+        sound.dispose();
         spriteBatch.dispose();
     }
 
